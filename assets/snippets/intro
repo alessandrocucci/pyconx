@@ -1,0 +1,61 @@
+from collections import defaultdict
+
+class LettorePresenze(object):
+    def __init__(self):
+        self.dipendenti = defaultdict(
+            lambda: defaultdict(float)
+        )
+
+    def leggi_file(self, nome_file, separatore=','):
+        with open(nome_file) as f:
+            righe = f.readlines()
+        for riga in righe:
+            yield riga.split(separatore)
+
+    def elabora(
+            self,
+            nome,
+            cognome,
+            ruolo,
+            data,
+            ore_lavorate):
+        self.dipendenti[
+            (cognome, nome, ruolo)
+        ][data] += ore_lavorate
+
+    def aggiungi(self, nome_file):
+        for riga in self.leggi_file(nome_file):
+            nome = riga[0]
+            cognome = riga[1]
+            ruolo = riga[2]
+            data = riga[3]
+            ore_lavorate = float(riga[4])
+            self.elabora(
+                nome,
+                cognome,
+                ruolo,
+                data,
+                ore_lavorate
+            )
+
+    def aggiungi_v2(self, nome_file):
+        for riga in self.leggi_file(nome_file):
+            nome, cognome, ruolo, data, ore_lavorate = riga
+            self.elabora(
+                nome,
+                cognome,
+                ruolo,
+                data,
+                ore_lavorate
+            )
+
+if __name__ == '__main__':
+    """
+    +----------+-------+--------+----------+--------------+
+    |   nome   |cognome|  ruolo |   data   | ore lavorate |
+    +==========+=======+========+==========+==============+
+    |Alessandro| Cucci | Py Dev | 01/04/19 |       8.0    |
+    +----------+-------+--------+----------+--------------+ 
+    """
+    presenze = LettorePresenze()
+    presenze.aggiungi("presenze_Aprile_2019.csv")

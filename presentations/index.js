@@ -24,7 +24,7 @@ import {
 } from "spectacle";
 
 // Import code slide
-import CodeSlide from 'spectacle-code-slide';
+import CodeSlide from "../spectacle-code-slide";
 
 // Import image preloader util
 import preloader from "spectacle/lib/utils/preloader";
@@ -39,6 +39,10 @@ require("spectacle/lib/themes/default/index.css");
 
 const images = {
   // stacks: require("../assets/solutions/queue-stack/stacks-on-stacks.gif")
+};
+
+const snippets = {
+  intro: require("raw-loader!../assets/snippets/intro")
 };
 
 preloader(images);
@@ -77,6 +81,39 @@ export default class Presentation extends React.Component {
             </Text>
           </Slide>
 
+          <Slide transition={["zoom"]} bgColor="primary">
+            <Heading size={1} fit caps lineHeight={1} textColor="secondary">
+              PyRE
+            </Heading>
+            <Text margin="10px 0 0" textColor="tertiary" size={1} fit bold>
+              Python User Group Reggio Emilia
+            </Text>
+            <Text margin="10px 0 0" textColor="tertiary" size={1} bold>
+              www.pyre.it
+            </Text>
+          </Slide>
+
+          <Slide transition={["zoom"]} bgColor="primary">
+            <Heading size={1} fit caps lineHeight={1} textColor="secondary">
+              A tu per tu col Machine Learning
+            </Heading>
+            <Text margin="10px 0 0" textColor="tertiary" size={1} fit bold>
+              thedotcompany
+            </Text>
+          </Slide>
+
+          <Slide transition={["zoom"]} bgColor="primary">
+            <Heading size={1} fit caps lineHeight={1} textColor="secondary">
+              Dataclasses
+            </Heading>
+            <Text margin="50px 0 0" textColor="tertiary" size={1} bold>
+              Python 3.7
+            </Text>
+            <Text margin="10px 0 0" textColor="secondary" size={1} bold>
+              PEP 557
+            </Text>
+          </Slide>
+
 
           {/*<Slide transition={["slide", "fade"]} bgColor="tertiary">*/}
           {/*  <CodePane*/}
@@ -87,19 +124,16 @@ export default class Presentation extends React.Component {
           {/*</Slide>*/}
 
           <CodeSlide
-            transition={["slide", "fade"]}
+            transition={["zoom"]}
             lang="js"
-            code={require("raw-loader!./index.js")}
+            code={snippets.intro}
             ranges={[
-              { loc: [0, 80], title: "Queue Stack" },
-              { loc: [0, 16], note: "define a stack" },
-              { loc: [19, 21], note: "we have our two stacks" },
-              { loc: [22, 25], note: "enqueue works the same as a normal queue"},
-              { loc: [26, 36], note: "dequeue will be more involved"},
-              { loc: [27, 30], note: "we need to empty inbox and push everything into outbux while doing so"},
-              { loc: [30, 31], note: "popping off outbox gives first item in inbox - we save it in temp"},
-              { loc: [31, 34], note: "now we have to empty the outbox and put everything back into the inbox"},
-              { loc: [34, 35], note: "we return the value we saved to temp as the dequeued number"}
+              { loc: [51, 61], title: "Giovani Padawan" },
+              { loc: [0, 7] },
+              { loc: [8, 13] },
+              { loc: [14, 24] },
+              { loc: [25, 39], note: "tutti abbiamo scritto questa merda..." },
+              { loc: [40, 50], note: "... poi siamo diventati fighi" }
             ]}
           />
 
