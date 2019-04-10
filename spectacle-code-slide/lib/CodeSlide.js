@@ -223,7 +223,7 @@ var CodeSlide = function (_React$Component) {
           dangerouslySetInnerHTML: { __html: getLineNumber(index) + line },
           style: {
             opacity: calculateOpacity(index, loc),
-            fontSize: "0.8em"
+            fontSize: "0.65em"
           } });
       });
 

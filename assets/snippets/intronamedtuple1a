@@ -1,0 +1,31 @@
+class Utente(tuple):
+    'Utente(nome, cognome, email)'
+
+    __slots__ = ()
+
+    _fields = ('nome', 'cognome', 'email')
+
+    def __new__(_cls, nome, cognome, email):
+        """
+        Create new instance of
+        Utente(nome, cognome, email)
+        """
+        return _tuple.__new__(_cls, (nome, cognome, email))
+
+    @classmethod
+    def _make(cls, iterable, new=tuple.__new__, len=len):
+        """Make a new Utente object
+        from a sequence or iterable"""
+        result = new(cls, iterable)
+        if len(result) != 3:
+            raise TypeError('Expected 3 arguments, got %d'
+                            % len(result))
+        return result
+
+    def __repr__(self):
+        'Return a nicely formatted representation string'
+        return 'Utente(nome=%r, cognome=%r, email=%r)' \
+               % self
+
+
+

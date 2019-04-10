@@ -1,0 +1,7 @@
+from dataclasses import dataclass
+
+@dataclass
+class Utente:
+    nome: str
+    cognome: str
+    email: str
