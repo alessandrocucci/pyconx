@@ -22,6 +22,7 @@ var Slide = _require.Slide;
 var CodeSlideTitle = require('./CodeSlideTitle');
 var CodeSlideNote = require('./CodeSlideNote');
 var CodeSlideImage = require('./CodeSlideImage');
+var CodeSlideLogo = require('./CodeSlideLogo');
 
 var clamp = require('lodash.clamp');
 var padStart = require('lodash.padstart');
@@ -248,7 +249,10 @@ var CodeSlide = function (_React$Component) {
           null,
           range.note
         ),
-        range.image && React.createElement(CodeSlideImage, { src: range.image })
+        range.image && React.createElement(CodeSlideImage, { src: range.image }),
+        React.createElement(CodeSlideLogo, {
+          src: require("../../assets/images/e3aranciobianco.png")
+        })
       );
     }
   }]);

@@ -30,15 +30,15 @@ import CodeSlide from "../spectacle-code-slide";
 import preloader from "spectacle/lib/utils/preloader";
 
 // Import theme
-import createTheme from "spectacle/lib/themes/default";
+import createTheme from "../theme";
 
 // Require CSS
 require("normalize.css");
-require("spectacle/lib/themes/default/index.css");
+require("../theme/index.css");
 
 
 const images = {
-  // stacks: require("../assets/solutions/queue-stack/stacks-on-stacks.gif")
+  logo: require("../assets/images/e3bianconero.png")
 };
 
 const snippets = {
@@ -47,9 +47,15 @@ const snippets = {
 
 preloader(images);
 
-const theme = createTheme({
-  primary: "#fe9b00"
-});
+const logostyle = {
+  position: "fixed",
+  bottom: 0,
+  right: 0,
+  width: "100%",
+  maxWidth: "100px"
+};
+
+const theme = createTheme({});
 
 export default class Presentation extends React.Component {
   render() {
@@ -69,6 +75,7 @@ export default class Presentation extends React.Component {
             <Text margin="10px 0 0" textColor="tertiary" size={1}>
               Firenze, 05 Maggio 2019
             </Text>
+            <Image src={images.logo} style={logostyle}/>
           </Slide>
 
 
@@ -79,6 +86,9 @@ export default class Presentation extends React.Component {
             <Text margin="10px 0 0" textColor="tertiary" size={1} fit bold>
               Python Developer @ Energee3
             </Text>
+          </Slide>
+
+          <Slide transition={["zoom"]} bgColor="primary">
           </Slide>
 
           <Slide transition={["zoom"]} bgColor="primary">
@@ -125,7 +135,7 @@ export default class Presentation extends React.Component {
 
           <CodeSlide
             transition={["zoom"]}
-            lang="js"
+            lang="python"
             code={snippets.intro}
             ranges={[
               { loc: [51, 61], title: "Giovani Padawan" },
