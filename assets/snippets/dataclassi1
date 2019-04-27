@@ -1,0 +1,8 @@
+from dataclasses import dataclass
+
+@dataclass
+class Utente:
+    username: str
+    password: str
+    email: str
+    autenticato: bool

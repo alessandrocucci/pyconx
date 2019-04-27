@@ -1,0 +1,92 @@
+from dataclasses import Field, _MISSING_TYPE, _DataclassParams
+
+
+class Utente:
+    "Utente(username: str, password: str, email: str, autenticato: bool)"
+
+    def __init__(
+            username: str,
+            password: str,
+            email: str,
+            autenticato: bool
+    ) -> None:
+        self.username = username
+        self.password = password
+        self.email = email
+        self.autenticato = autenticato
+
+    def __repr__(self):
+        return (
+            self.__class__.__qualname__
+            + f"(username={self.username!r}, password={self.password!r}, "
+            f"email={self.email!r}, autenticato={self.autenticato!r})"
+        )
+
+    def __eq__(self, other):
+        if other.__class__ is self.__class__:
+            return (self.username, self.password,
+                    self.email, self.autenticato) == (
+                other.username,
+                other.password,
+                other.email,
+                other.autenticato
+            )
+        return NotImplemented
+
+    __hash__ = None
+
+    username: str
+    password: str
+    email: str
+    autenticato: bool
+
+    __dataclass_params__ = _DataclassParams(
+        init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False
+    )
+
+    __dataclass_fields__ = {
+        "username": Field(
+            default=_MISSING_TYPE,
+            default_factory=_MISSING_TYPE,
+            init=True,
+            repr=True,
+            hash=None,
+            compare=True,
+            metadata={},
+        ),
+        "password": Field(
+            default=_MISSING_TYPE,
+            default_factory=_MISSING_TYPE,
+            init=True,
+            repr=True,
+            hash=None,
+            compare=True,
+            metadata={},
+        ),
+        "email": Field(
+            default=_MISSING_TYPE,
+            default_factory=_MISSING_TYPE,
+            init=True,
+            repr=True,
+            hash=None,
+            compare=True,
+            metadata={},
+        ),
+        "autenticato": Field(
+            default=_MISSING_TYPE,
+            default_factory=_MISSING_TYPE,
+            init=True,
+            repr=True,
+            hash=None,
+            compare=True,
+            metadata={},
+        ),
+    }
+    __dataclass_fields__["username"].name = "username"
+    __dataclass_fields__["username"].type = str
+    __dataclass_fields__["password"].name = "password"
+    __dataclass_fields__["password"].type = str
+    __dataclass_fields__["email"].name = "email"
+    __dataclass_fields__["email"].type = str
+    __dataclass_fields__["autenticato"].name = "autenticato"
+    __dataclass_fields__["autenticato"].type = bool

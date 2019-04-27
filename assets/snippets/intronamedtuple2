@@ -15,3 +15,31 @@ class Utente(tuple):
     def __getnewargs__(self):
         """Return self as a plain tuple. Used by copy and pickle."""
         return tuple(self)
+
+    def __new__(_cls, nome, cognome, email):
+        """
+        Create new instance of
+        Utente(nome, cognome, email)
+        """
+        return _tuple.__new__(_cls, (nome, cognome, email))
+
+    @classmethod
+    def _make(cls, iterable, new=tuple.__new__, len=len):
+        """Make a new Utente object
+        from a sequence or iterable"""
+        result = new(cls, iterable)
+        if len(result) != 3:
+            raise TypeError('Expected 3 arguments, got %d'
+                            % len(result))
+        return result
+
+    def _replace(_self, **kwds):
+        """Return a new Utente object replacing
+        specified fields with new values"""
+        result = _self._make(
+            map(kwds.pop, ('nome', 'cognome', 'email'), _self)
+        )
+        if kwds:
+            raise ValueError('Got unexpected field names: %r'
+                             % kwds.keys())
+        return result

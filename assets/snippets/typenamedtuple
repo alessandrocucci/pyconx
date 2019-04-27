@@ -1,0 +1,6 @@
+from typing import NamedTuple
+
+class Utente(NamedTuple):
+    nome: str
+    cognome: str
+    indirizzo: str = ""

@@ -25,7 +25,7 @@ import {
 
 // Import code slide
 import CodeSlide from "../spectacle-code-slide";
-import Terminal from "spectacle-terminal";
+import Terminal from "../spectacle-terminal";
 
 // Import image preloader util
 import preloader from "spectacle/lib/utils/preloader";
@@ -49,7 +49,11 @@ const snippets = {
   introdataclasses: require("raw-loader!../assets/snippets/introdataclasses"),
   intronamedtuple1a: require("raw-loader!../assets/snippets/intronamedtuple1a"),
   intronamedtuple1b: require("raw-loader!../assets/snippets/intronamedtuple1b"),
-  intronamedtuple2: require("raw-loader!../assets/snippets/intronamedtuple2")
+  intronamedtuple2: require("raw-loader!../assets/snippets/intronamedtuple2"),
+  typenamedtuple: require("raw-loader!../assets/snippets/typenamedtuple"),
+  dataclassi1: require("raw-loader!../assets/snippets/dataclassi1"),
+  dataclassi2: require("raw-loader!../assets/snippets/dataclassi2"),
+  postinit: require("raw-loader!../assets/snippets/postinit")
 };
 
 preloader(images);
@@ -96,6 +100,13 @@ export default class Presentation extends React.Component {
           </Slide>
 
           <Slide transition={["zoom"]} bgColor="primary">
+            <Image src={images.libro} style={{
+              width: "100%",
+              maxWidth: "400px"
+            }}/>
+          </Slide>
+
+          <Slide transition={["zoom"]} bgColor="primary">
             <Image src={images.pyre}/>
             <Text margin="10px 0 0" textColor="secondary" size={1} bold>
               www.pyre.it
@@ -103,13 +114,6 @@ export default class Presentation extends React.Component {
             <Text margin="10px 0 0" textColor="secondary" size={1} bold>
               t.me/pyreit
             </Text>
-          </Slide>
-
-          <Slide transition={["zoom"]} bgColor="primary">
-            <Image src={images.libro} style={{
-              width: "100%",
-              maxWidth: "400px"
-            }}/>
           </Slide>
 
           <Slide transition={["zoom"]} bgColor="primary">
@@ -143,15 +147,6 @@ export default class Presentation extends React.Component {
               </Appear>
             </Layout>
           </Slide>
-
-
-          {/*<Slide transition={["slide", "fade"]} bgColor="tertiary">*/}
-          {/*  <CodePane*/}
-          {/*    lang="js"*/}
-          {/*    source={require("raw-loader!./index.js")}*/}
-          {/*    margin="20px auto"*/}
-          {/*  />*/}
-          {/*</Slide>*/}
 
           <CodeSlide
             transition={["zoom"]}
@@ -256,16 +251,302 @@ export default class Presentation extends React.Component {
                 <div>>>> import json</div>
                 <div>>>> json.dumps(a)</div>
                 <div>'["Alessandro", "Cucci", "alessandro.cucci@energee3.com"]'</div>
-              </div>,
-              <div>
-                <div>>>> import pickle</div>
-                <div>>>> pickle.loads(pickle.dumps(a))</div>
-                <div>Utente(nome='Alessandro', cognome='Cucci', email='alessandro.cucci@energee3.com')</div>
-              </div>,
+              </div>
             ]}
             />
           </Slide>
 
+          <Slide transition={["slide", "fade"]}>
+            <Terminal title="1. alessandro@energee3: ~(zsh)" output={[
+              <div>
+                <div>>>> from collections import namedtuple</div>
+                <div>>>> Utente = namedtuple("Utente", "nome cognome email")</div>
+                <div>>>> a = Utente("Alessandro", "Cucci", "alessandro.cucci@energee3.com")</div>
+              </div>,
+              <div>
+                <div>>>> a.nome = "Andrea"</div>
+                <div>Traceback (most recent call last):</div>
+                <div>  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</div>
+                <div>AttributeError: can't set attribute</div>
+              </div>
+            ]}
+            />
+          </Slide>
+
+          <CodeSlide
+            transition={["zoom"]}
+            code={snippets.intronamedtuple2}
+            lang="python"
+            ranges={[
+              { loc: [18, 24] },
+              { loc: [25, 34] },
+              { loc: [35, 45] }
+            ]}
+          />
+
+          <Slide transition={["slide", "fade"]}>
+            <Terminal title="1. alessandro@energee3: ~(zsh)" output={[
+              <div>
+                <div>>>> from collections import namedtuple</div>
+                <div>>>> Utente = namedtuple("Utente", "nome cognome email")</div>
+                <div>>>> a = Utente("Alessandro", "Cucci", "alessandro.cucci@energee3.com")</div>
+              </div>,
+              <div>
+                <div>>>> a._replace(nome="Andrea")</div>
+                <div>Utente(nome='Andrea', cognome='Cucci', email='alessandro.cucci@energee3.com')</div>
+              </div>,
+              <div>
+                <div>>>> a</div>
+                <div>Utente(nome='Alessandro', cognome='Cucci', email='alessandro.cucci@energee3.com')</div>
+              </div>,
+              <div>
+                <div>>>> b = a._replace(nome="Andrea")</div>
+                <div>>>> a is b</div>
+                <div>False</div>
+              </div>,
+              <div>
+                <div>>>> b = Utente("Alessandro", "Cucci", "alessandro.cucci@energee3.com")</div>
+                <div>>>> a is b</div>
+                <div>False</div>
+                <div>>>> a == b</div>
+                <div>False</div>
+              </div>
+            ]}
+            />
+          </Slide>
+
+          <CodeSlide
+            transition={["zoom"]}
+            code={snippets.typenamedtuple}
+            lang="python"
+            ranges={[
+              { loc: [0, 6] }
+            ]}
+          />
+
+          <Slide transition={["slide", "fade"]}>
+            <Terminal title="1. alessandro@energee3: ~(zsh)" output={[
+              <div>
+                <div>>>> Utente("Alessandro", "Cucci")</div>
+                <div>Utente(nome='Alessandro', cognome='Cucci', indirizzo='')</div>
+              </div>
+            ]}
+            />
+          </Slide>
+
+          <CodeSlide
+            transition={["zoom"]}
+            code={snippets.dataclassi1}
+            lang="python"
+            ranges={[
+              { loc: [0, 8] }
+            ]}
+          />
+
+          <CodeSlide
+            transition={["zoom"]}
+            code={snippets.dataclassi2}
+            lang="python"
+            ranges={[
+              { loc: [0, 16] },
+              { loc: [17, 23] },
+              { loc: [24, 34] }
+            ]}
+          />
+
+          <Slide transition={["slide", "fade"]}>
+            <Terminal title="1. alessandro@energee3: ~(zsh)" output={[
+              <div>
+                <div>>>> from collections import namedtuple</div>
+                <div>>>></div>
+                <div>>>> Personale = namedtuple("Personale", "nome cognome")</div>
+                <div>>>> Utente = namedtuple("Utente", "nome cognome")</div>
+                <div>>>></div>
+                <div>>>> p = Personale("Alessandro", "Cucci")</div>
+                <div>>>> u = Utente("Alessandro", "Cucci")</div>
+                <div>>>></div>
+                <div>>>> p == u</div>
+                <div>True</div>
+              </div>,
+              <div>
+                <div>>>> from dataclasses import dataclass</div>
+                <div>>>></div>
+                <div>>>> @dataclass</div>
+                <div>... class Personale:</div>
+                <div>...     nome: str</div>
+                <div>...     cognome: str</div>
+                <div>...</div>
+              </div>,
+              <div>
+                <div>>>> @dataclass</div>
+                <div>... class Utente:</div>
+                <div>...     nome: str</div>
+                <div>...     cognome: str</div>
+                <div>...</div>
+              </div>,
+              <div>
+                <div>>>> p = Personale("Alessandro", "Cucci")</div>
+                <div>>>> u = Utente("Alessandro", "Cucci")</div>
+                <div>>>></div>
+                <div>>>> p == u</div>
+                <div>False</div>
+              </div>
+            ]}
+            />
+          </Slide>
+
+          <Slide transition={["zoom"]} bgColor="primary">
+            <Text margin="10px 0 0" textColor="secondary" size={1} bold>
+              Parametri accettati da @dataclass
+            </Text>
+            <Appear>
+              <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+                - init=True
+              </Text>
+            </Appear>
+            <Appear>
+              <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+                - repr=True
+              </Text>
+            </Appear>
+            <Appear>
+              <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+                - eq=True
+              </Text>
+            </Appear>
+            <Appear>
+              <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+                - order=False
+              </Text>
+            </Appear>
+            <Appear>
+              <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+                - unsafe_hash=False
+              </Text>
+            </Appear>
+            <Appear>
+              <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+                - frozen=False
+              </Text>
+            </Appear>
+          </Slide>
+
+          <Slide transition={["zoom"]} bgColor="primary">
+            <Text margin="10px 0 0" textColor="secondary" size={1} bold>
+              Metodi di comodo
+            </Text>
+            <Appear>
+              <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+                - asdict
+              </Text>
+            </Appear>
+            <Appear>
+              <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+                - astuple
+              </Text>
+            </Appear>
+            <Appear>
+              <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+                - replace
+              </Text>
+            </Appear>
+            <Appear>
+              <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+                - is_dataclass
+              </Text>
+            </Appear>
+          </Slide>
+
+          <Slide transition={["zoom"]} bgColor="primary">
+            <Layout>
+              <Fill>
+                <Text margin="10px 0 0" textColor="secondary" size={1} bold>
+                  Dataclasses
+                </Text>
+                <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+                  replace()
+                </Text>
+                <Text margin="10px 0 0" textColor="tertiary" size={1} bold>
+                  asdict() -> dict
+                </Text>
+                <Text margin="10px 0 0" textColor="tertiary" size={1} bold>
+                  astuple()
+                </Text>
+                <Text margin="10px 0 0" textColor="tertiary" size={1} bold>
+                  Mutevoli
+                </Text>
+                <Text margin="10px 0 0" textColor="tertiary" size={1} bold>
+                  Non hashable
+                </Text>
+                <Text margin="10px 0 0" textColor="tertiary" size={1} bold>
+                  Non iterabili
+                </Text>
+                <Text margin="10px 0 0" textColor="tertiary" size={1} bold>
+                  Memoria:
+                </Text>
+                <Text margin="10px 0 0" textColor="tertiary" size={1} bold>
+                  Accesso:
+                </Text>
+              </Fill>
+              <Appear>
+                <Fill>
+                  <Text margin="10px 0 0" textColor="secondary" size={1} bold>
+                    Namedtuple
+                  </Text>
+                    <Appear>
+                      <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+                        _replace()
+                      </Text>
+                    </Appear>
+                    <Appear>
+                      <Text margin="10px 0 0" textColor="tertiary" size={1} bold>
+                        _asdict() -> OrderedDict
+                      </Text>
+                    </Appear>
+                    <Appear>
+                      <Text margin="10px 0 0" textColor="tertiary" size={1} bold>
+                        tuple()
+                      </Text>
+                    </Appear>
+                    <Appear>
+                      <Text margin="10px 0 0" textColor="tertiary" size={1} bold>
+                        Immutabili
+                      </Text>
+                    </Appear>
+                    <Appear>
+                      <Text margin="10px 0 0" textColor="tertiary" size={1} bold>
+                        Hashable
+                      </Text>
+                    </Appear>
+                    <Appear>
+                      <Text margin="10px 0 0" textColor="tertiary" size={1} bold>
+                        Iterabili
+                      </Text>
+                    </Appear>
+                    <Appear>
+                      <Text margin="10px 0 0" textColor="tertiary" size={1} bold>
+                        Memoria:
+                      </Text>
+                    </Appear>
+                    <Appear>
+                      <Text margin="10px 0 0" textColor="tertiary" size={1} bold>
+                        Accesso:
+                      </Text>
+                    </Appear>
+                </Fill>
+              </Appear>
+            </Layout>
+          </Slide>
+
+          <CodeSlide
+            transition={["zoom"]}
+            code={snippets.postinit}
+            lang="python"
+            ranges={[
+              { loc: [0, 5] },
+              { loc: [6, 14] }
+            ]}
+          />
 
           <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
             <BlockQuote>
