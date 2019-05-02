@@ -1,0 +1,9 @@
+from dataclasses import dataclass, field
+
+@dataclass
+class Utente:
+    nome: str = ""
+
+@dataclass
+class Utente:
+    nome: str = field(default="")

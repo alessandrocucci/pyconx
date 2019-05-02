@@ -53,7 +53,11 @@ const snippets = {
   typenamedtuple: require("raw-loader!../assets/snippets/typenamedtuple"),
   dataclassi1: require("raw-loader!../assets/snippets/dataclassi1"),
   dataclassi2: require("raw-loader!../assets/snippets/dataclassi2"),
-  postinit: require("raw-loader!../assets/snippets/postinit")
+  postinit: require("raw-loader!../assets/snippets/postinit"),
+  order: require("raw-loader!../assets/snippets/order"),
+  freeze: require("raw-loader!../assets/snippets/freeze"),
+  fieldsdefault: require("raw-loader!../assets/snippets/fieldsdefault"),
+  fieldsdefaultfactory: require("raw-loader!../assets/snippets/fieldsdefaultfactory")
 };
 
 preloader(images);
@@ -191,14 +195,14 @@ export default class Presentation extends React.Component {
                 <div>[Clang 4.0.1 (tags/RELEASE_401/final)] :: Anaconda custom (64-bit) on darwin</div>
                 <div>Type "help", "copyright", "credits" or "license" for more information.</div>
                 <div>>>></div>
+                <div>>>> from collections import namedtuple</div>
+                <div>>>> Utente = namedtuple("Utente", "nome cognome email")</div>
+                <div>>>> a = Utente("Alessandro", "Cucci", "alessandro.cucci@energee3.com")</div>
               </div>,
-              <div>>>> from collections import namedtuple</div>,
-              <div>>>> Utente = namedtuple("Utente", "nome cognome email")</div>,
-              <div>>>> a = Utente("Alessandro", "Cucci", "alessandro.cucci@energee3.com")</div>,
               <div>>>> a[1]</div>,
               <div>Cucci</div>,
-              <div>>>> a.nome</div>,
-              <div>Alessandro</div>
+              <div>>>> a.email</div>,
+              <div>alessandro.cucci@energee3.com</div>
             ]}
             />
           </Slide>
@@ -257,7 +261,10 @@ export default class Presentation extends React.Component {
           </Slide>
 
           <Slide transition={["slide", "fade"]}>
-            <Terminal title="1. alessandro@energee3: ~(zsh)" output={[
+            <Text margin="10px 0 0" textColor="secondary" size={1} bold>
+              Le tuple sono immutabili!
+            </Text>
+            <Terminal margin="30px 0 0" title="1. alessandro@energee3: ~(zsh)" output={[
               <div>
                 <div>>>> from collections import namedtuple</div>
                 <div>>>> Utente = namedtuple("Utente", "nome cognome email")</div>
@@ -303,13 +310,22 @@ export default class Presentation extends React.Component {
                 <div>>>> b = a._replace(nome="Andrea")</div>
                 <div>>>> a is b</div>
                 <div>False</div>
+              </div>
+            ]}
+            />
+          </Slide>
+
+          <Slide transition={["slide", "fade"]}>
+            <Terminal title="1. alessandro@energee3: ~(zsh)" output={[
+              <div>
+                <div>>>> from collections import namedtuple</div>
+                <div>>>> Utente = namedtuple("Utente", "nome cognome email")</div>
+                <div>>>> a = Utente("Alessandro", "Cucci")</div>
               </div>,
               <div>
-                <div>>>> b = Utente("Alessandro", "Cucci", "alessandro.cucci@energee3.com")</div>
-                <div>>>> a is b</div>
-                <div>False</div>
-                <div>>>> a == b</div>
-                <div>False</div>
+                <div>Traceback (most recent call last):</div>
+                <div> File "&lt;stdin&gt;", line 1, in &lt;module&gt;</div>
+                <div>TypeError: __new__() missing 1 required positional argument: 'email'</div>
               </div>
             ]}
             />
@@ -328,7 +344,23 @@ export default class Presentation extends React.Component {
             <Terminal title="1. alessandro@energee3: ~(zsh)" output={[
               <div>
                 <div>>>> Utente("Alessandro", "Cucci")</div>
-                <div>Utente(nome='Alessandro', cognome='Cucci', indirizzo='')</div>
+                <div>Utente(nome='Alessandro', cognome='Cucci', email='')</div>
+              </div>
+            ]}
+            />
+          </Slide>
+
+          <Slide transition={["slide", "fade"]}>
+            <Text margin="10px 0 0" textColor="secondary" size={1} bold>
+              Le tuple sono immutabili!
+            </Text>
+            <Terminal margin="30px 0 0" title="1. alessandro@energee3: ~(zsh)" output={[
+              <div>
+                <div>>>> a = Utente("Alessandro", "Cucci", "alessandro.cucci@energee3.com")</div>
+                <div>>>> a.email = "alessandro.cucci@gmail.com"</div>
+                <div>Traceback (most recent call last):</div>
+                <div>  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</div>
+                <div>AttributeError: can't set attribute</div>
               </div>
             ]}
             />
@@ -419,6 +451,36 @@ export default class Presentation extends React.Component {
                 - order=False
               </Text>
             </Appear>
+          </Slide>
+
+          <CodeSlide
+            transition={["zoom"]}
+            code={snippets.order}
+            lang="python"
+            ranges={[
+              { loc: [0, 8] },
+              { loc: [10, 18] },
+              { loc: [20, 28] },
+              { loc: [30, 38] }
+            ]}
+          />
+
+          <Slide transition={["zoom"]} bgColor="primary">
+            <Text margin="10px 0 0" textColor="secondary" size={1} bold>
+              Parametri accettati da @dataclass
+            </Text>
+            <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+                - init=True
+            </Text>
+            <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+              - repr=True
+            </Text>
+            <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+              - eq=True
+            </Text>
+            <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+              - order=False
+            </Text>
             <Appear>
               <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
                 - unsafe_hash=False
@@ -429,6 +491,254 @@ export default class Presentation extends React.Component {
                 - frozen=False
               </Text>
             </Appear>
+          </Slide>
+
+          <CodeSlide
+            transition={["zoom"]}
+            code={snippets.freeze}
+            lang="python"
+            ranges={[
+              { loc: [0, 4] },
+              { loc: [6, 11] }
+            ]}
+          />
+
+          <Slide transition={["zoom"]} bgColor="primary">
+            <Text margin="10px 0 0" textColor="secondary" size={1} bold>
+              Performance
+            </Text>
+            <Appear>
+              <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+                - metodi Python generati
+              </Text>
+            </Appear>
+            <Appear>
+              <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+                - le tuple sono scritte in C
+              </Text>
+            </Appear>
+          </Slide>
+
+          <Slide transition={["slide", "fade"]}>
+            <Terminal margin="30px 0 0" title="1. alessandro@energee3: ~(zsh)" output={[
+              <div>
+                <div>>>> @dataclass(order=True, frozen=True)</div>
+                <div>... class PersonaleDT:</div>
+                <div>...     nome: str</div>
+                <div>...     cognome: str</div>
+                <div>...</div>
+              </div>,
+              <div>>>> PersonaleNT = namedtuple("PersonaleNT", "nome cognome")</div>,
+              <div>
+                <div>>>> dt = PersonaleDT("Alessandro", "Cucci")</div>
+                <div>>>> nt = PersonaleNT("Alessandro", "Cucci")</div>
+              </div>,
+              <div>
+                <div>>>> import sys</div>
+                <div>>>> sys.getsizeof(dt)</div>
+                <div>56</div>
+                <div>>>> sys.getsizeof(nt)</div>
+                <div>64</div>
+              </div>,
+              <div>
+                <div>>>> import timeit</div>
+                <div>>>> min(timeit.repeat('dt.nome', 'from __main__ import dt'))</div>
+                <div>0.03248705200002178</div>
+                <div>>>> min(timeit.repeat('nt.nome', 'from __main__ import nt'))</div>
+                <div>0.054184894999991684</div>
+              </div>
+            ]}
+            />
+          </Slide>
+
+          <Slide transition={["zoom"]} bgColor="primary">
+            <Text margin="10px 0 0" textColor="secondary" size={1} bold>
+              Il metodo field()
+            </Text>
+            <Appear>
+              <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+                - default
+              </Text>
+            </Appear>
+          </Slide>
+
+          <CodeSlide
+            transition={["zoom"]}
+            code={snippets.fieldsdefault}
+            lang="python"
+            ranges={[
+              { loc: [0, 9] }
+            ]}
+          />
+
+          <Slide transition={["zoom"]} bgColor="primary">
+            <Text margin="10px 0 0" textColor="secondary" size={1} bold>
+              Il metodo field()
+            </Text>
+            <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+              - default
+            </Text>
+            <Appear>
+              <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+                - default_factory
+              </Text>
+            </Appear>
+            <Appear>
+              <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+                - init
+              </Text>
+            </Appear>
+            <Appear>
+              <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+                - repr
+              </Text>
+            </Appear>
+            <Appear>
+              <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+                - compare
+              </Text>
+            </Appear>
+          </Slide>
+
+          <CodeSlide
+            transition={["zoom"]}
+            code={snippets.fieldsdefaultfactory}
+            lang="python"
+            ranges={[
+              { loc: [0, 9] }
+            ]}
+          />
+
+          <Slide transition={["slide", "fade"]}>
+            <Terminal margin="30px 0 0" title="1. alessandro@energee3: ~(zsh)" output={[
+              <div>
+                <div>>>> u1 = Utente("Alessandro")</div>
+                <div>>>> u1.aggiungi_amico("Andrea")</div>
+                <div>>>> u1.lista_amici</div>
+                <div>['Andrea']</div>
+              </div>,
+              <div>>>> u2 = Utente("Marco")</div>,
+              <div>>>> u2.lista_amici</div>,
+              <div>['Andrea']</div>
+            ]}
+            />
+          </Slide>
+
+          <CodeSlide
+            transition={["zoom"]}
+            code={snippets.fieldsdefaultfactory}
+            lang="python"
+            ranges={[
+              { loc: [0, 9] },
+              { loc: [11, 18] }
+            ]}
+          />
+
+          <Slide transition={["slide", "fade"]}>
+            <Quote margin="30px 0 0" textColor="tertiary" size={1} bold>
+              ValueError: mutable default &lt;class 'list'&gt; for field lista_amici is not allowed: use default_factory
+            </Quote>
+          </Slide>
+
+          <CodeSlide
+            transition={["zoom"]}
+            code={snippets.fieldsdefaultfactory}
+            lang="python"
+            ranges={[
+              { loc: [20, 27] }
+            ]}
+          />
+
+          <Slide transition={["slide", "fade"]}>
+            <Terminal margin="30px 0 0" title="1. alessandro@energee3: ~(zsh)" output={[
+              <div>
+                <div>>>> u1 = Utente("Alessandro")</div>
+                <div>>>> u1.aggiungi_amico("Andrea")</div>
+                <div>>>> u1.lista_amici</div>
+                <div>['Andrea']</div>
+              </div>,
+              <div>>>> u2 = Utente("Marco")</div>,
+              <div>>>> u2.lista_amici</div>,
+              <div>[]</div>
+            ]}
+            />
+          </Slide>
+
+          <Slide transition={["zoom"]} bgColor="primary">
+            <Text margin="10px 0 0" textColor="secondary" size={1} bold>
+              Il metodo field()
+            </Text>
+            <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+              - default
+            </Text>
+            <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+              - default_factory
+            </Text>
+            <Appear>
+              <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+                - init
+              </Text>
+            </Appear>
+            <Appear>
+              <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+                - repr
+              </Text>
+            </Appear>
+            <Appear>
+              <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+                - compare
+              </Text>
+            </Appear>
+          </Slide>
+
+          <Slide transition={["zoom"]} bgColor="primary">
+            <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+              il metoto __post_init__
+            </Text>
+          </Slide>
+
+          <CodeSlide
+            transition={["zoom"]}
+            code={snippets.postinit}
+            lang="python"
+            ranges={[
+              { loc: [0, 8] }
+            ]}
+          />
+
+          <Slide transition={["slide", "fade"]}>
+            <Terminal margin="30px 0 0" title="1. alessandro@energee3: ~(zsh)" output={[
+              <div>
+                <div>>>> o = Ordine(10, 5)</div>
+                <div>>>> o.qta</div>
+              </div>,
+              <div>5</div>,
+              <div>>>> repr(o)</div>,
+              <div>'Ordine(qta_ordinata=10, qta_annullata=5)'</div>
+            ]}
+            />
+          </Slide>
+
+          <CodeSlide
+            transition={["zoom"]}
+            code={snippets.postinit}
+            lang="python"
+            ranges={[
+              { loc: [10, 18] }
+            ]}
+          />
+
+          <Slide transition={["slide", "fade"]}>
+            <Terminal margin="30px 0 0" title="1. alessandro@energee3: ~(zsh)" output={[
+              <div>
+                <div>>>> o = Ordine(10, 5)</div>
+                <div>>>> o.qta</div>
+              </div>,
+              <div>5</div>,
+              <div>>>> repr(o)</div>,
+              <div>'Ordine(qta_ordinata=10, qta_annullata=5, qta=5)'</div>
+            ]}
+            />
           </Slide>
 
           <Slide transition={["zoom"]} bgColor="primary">
@@ -481,12 +791,6 @@ export default class Presentation extends React.Component {
                 <Text margin="10px 0 0" textColor="tertiary" size={1} bold>
                   Non iterabili
                 </Text>
-                <Text margin="10px 0 0" textColor="tertiary" size={1} bold>
-                  Memoria:
-                </Text>
-                <Text margin="10px 0 0" textColor="tertiary" size={1} bold>
-                  Accesso:
-                </Text>
               </Fill>
               <Appear>
                 <Fill>
@@ -523,30 +827,10 @@ export default class Presentation extends React.Component {
                         Iterabili
                       </Text>
                     </Appear>
-                    <Appear>
-                      <Text margin="10px 0 0" textColor="tertiary" size={1} bold>
-                        Memoria:
-                      </Text>
-                    </Appear>
-                    <Appear>
-                      <Text margin="10px 0 0" textColor="tertiary" size={1} bold>
-                        Accesso:
-                      </Text>
-                    </Appear>
                 </Fill>
               </Appear>
             </Layout>
           </Slide>
-
-          <CodeSlide
-            transition={["zoom"]}
-            code={snippets.postinit}
-            lang="python"
-            ranges={[
-              { loc: [0, 5] },
-              { loc: [6, 14] }
-            ]}
-          />
 
           <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
             <BlockQuote>
@@ -554,6 +838,21 @@ export default class Presentation extends React.Component {
                 Grazie a tutti!
               </Quote>
             </BlockQuote>
+          </Slide>
+
+          <Slide transition={["zoom"]} bgColor="primary">
+            <Text margin="10px 0 0" textColor="secondary" size={1} bold>
+              Riferimenti
+            </Text>
+            <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+                https://www.python.org/dev/peps/pep-0557/
+            </Text>
+            <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+              https://docs.python.org/3/library/dataclasses.html
+            </Text>
+            <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+              https://github.com/alessandrocucci/pyconx
+            </Text>
           </Slide>
 
 

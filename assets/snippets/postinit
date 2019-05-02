@@ -2,7 +2,11 @@
 class Ordine:
     qta_ordinata: float
     qta_annullata: float
-    qta: float
+
+    @property
+    def qta(self):
+        return self.qta_ordinata - self.qta_annullata
+
 
 @dataclass
 class Ordine:
@@ -11,4 +15,4 @@ class Ordine:
     qta: float = field(init=False)
 
     def __post_init__(self):
-        self.qta = self.qta_ordinata + self.qta_annullata
+        self.qta = self.qta_ordinata - self.qta_annullata

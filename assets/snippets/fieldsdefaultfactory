@@ -1,0 +1,27 @@
+class Utente:
+    nome: str
+    lista_amici: list = []
+
+    def __init__(self, nome):
+        self.nome = nome
+
+    def aggiungi_amico(self, nome):
+        self.lista_amici.append(nome)
+
+
+@dataclass
+class Utente:
+    nome: str
+    lista_amici: list = []
+
+    def aggiungi_amico(self, nome):
+        self.lista_amici.append(nome)
+
+
+@dataclass
+class Utente:
+    nome: str
+    lista_amici: list = field(default_factory=list)
+
+    def aggiungi_amico(self, nome):
+        self.lista_amici.append(nome)
