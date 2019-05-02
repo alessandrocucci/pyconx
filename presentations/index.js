@@ -201,12 +201,12 @@ export default class Presentation extends React.Component {
                 <div>>>></div>
                 <div>>>> from collections import namedtuple</div>
                 <div>>>> Utente = namedtuple("Utente", "nome cognome email")</div>
-                <div>>>> a = Utente("Alessandro", "Cucci", "alessandro.cucci@energee3.com")</div>
+                <div>>>> u = Utente("Tony", "Stark", "iamironman@starkindustries.com")</div>
               </div>,
-              <div>>>> a[1]</div>,
-              <div>Cucci</div>,
-              <div>>>> a.email</div>,
-              <div>alessandro.cucci@energee3.com</div>
+              <div>>>> u[1]</div>,
+              <div>Stark</div>,
+              <div>>>> u.email</div>,
+              <div>iamironman@starkindustries.com</div>
             ]}
             />
           </Slide>
@@ -225,14 +225,14 @@ export default class Presentation extends React.Component {
               <div>
                 <div>>>> from collections import namedtuple</div>
                 <div>>>> Utente = namedtuple("Utente", "nome cognome email")</div>
-                <div>>>> a = Utente("Alessandro", "Cucci", "alessandro.cucci@energee3.com")</div>
+                <div>>>> u = Utente("Tony", "Stark", "iamironman@starkindustries.com")</div>
               </div>,
-              <div>>>> a._asdict()</div>,
+              <div>>>> u._asdict()</div>,
               <div>
                 <div>OrderedDict([</div>
-                <div>    ('nome', 'Alessandro'), </div>
-                <div>    ('cognome', 'Cucci'), </div>
-                <div>    ('email', 'alessandro.cucci@energee3.com')</div>
+                <div>    ('nome', 'Tony'), </div>
+                <div>    ('cognome', 'Stark'), </div>
+                <div>    ('email', 'iamironman@starkindustries.com')</div>
                 <div>])</div>
               </div>
             ]}
@@ -253,12 +253,12 @@ export default class Presentation extends React.Component {
               <div>
                 <div>>>> from collections import namedtuple</div>
                 <div>>>> Utente = namedtuple("Utente", "nome cognome email")</div>
-                <div>>>> a = Utente("Alessandro", "Cucci", "alessandro.cucci@energee3.com")</div>
+                <div>>>> u = Utente("Tony", "Stark", "iamironman@starkindustries.com")</div>
               </div>,
               <div>
                 <div>>>> import json</div>
                 <div>>>> json.dumps(a)</div>
-                <div>'["Alessandro", "Cucci", "alessandro.cucci@energee3.com"]'</div>
+                <div>'["Tony", "Stark", "iamironman@starkindustries.com"]'</div>
               </div>
             ]}
             />
@@ -272,10 +272,10 @@ export default class Presentation extends React.Component {
               <div>
                 <div>>>> from collections import namedtuple</div>
                 <div>>>> Utente = namedtuple("Utente", "nome cognome email")</div>
-                <div>>>> a = Utente("Alessandro", "Cucci", "alessandro.cucci@energee3.com")</div>
+                <div>>>> u = Utente("Tony", "Stark", "iamironman@starkindustries.com")</div>
               </div>,
               <div>
-                <div>>>> a.nome = "Andrea"</div>
+                <div>>>> u.nome = "Ned"</div>
                 <div>Traceback (most recent call last):</div>
                 <div>  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</div>
                 <div>AttributeError: can't set attribute</div>
@@ -300,18 +300,18 @@ export default class Presentation extends React.Component {
               <div>
                 <div>>>> from collections import namedtuple</div>
                 <div>>>> Utente = namedtuple("Utente", "nome cognome email")</div>
-                <div>>>> a = Utente("Alessandro", "Cucci", "alessandro.cucci@energee3.com")</div>
+                <div>>>> a = Utente("Tony", "Stark", "iamironman@starkindustries.com")</div>
               </div>,
               <div>
-                <div>>>> a._replace(nome="Andrea")</div>
-                <div>Utente(nome='Andrea', cognome='Cucci', email='alessandro.cucci@energee3.com')</div>
+                <div>>>> a._replace(nome="Ned", email="winteriscoming@carrierpigeons.net")</div>
+                <div>Utente(nome='Ned', cognome='Stark', email='winteriscoming@carrierpigeons.net')</div>
               </div>,
               <div>
                 <div>>>> a</div>
-                <div>Utente(nome='Alessandro', cognome='Cucci', email='alessandro.cucci@energee3.com')</div>
+                <div>Utente(nome='Tony', cognome='Stark', email='iamironman@starkindustries.com')</div>
               </div>,
               <div>
-                <div>>>> b = a._replace(nome="Andrea")</div>
+                <div>>>> b = a._replace(nome="Ned", email="winteriscoming@carrierpigeons.net")</div>
                 <div>>>> a is b</div>
                 <div>False</div>
               </div>
@@ -324,7 +324,7 @@ export default class Presentation extends React.Component {
               <div>
                 <div>>>> from collections import namedtuple</div>
                 <div>>>> Utente = namedtuple("Utente", "nome cognome email")</div>
-                <div>>>> a = Utente("Alessandro", "Cucci")</div>
+                <div>>>> a = Utente(nome='Tony', cognome='Stark')</div>
               </div>,
               <div>
                 <div>Traceback (most recent call last):</div>
@@ -347,8 +347,8 @@ export default class Presentation extends React.Component {
           <Slide transition={["slide", "fade"]}>
             <Terminal title="1. alessandro@energee3: ~(zsh)" output={[
               <div>
-                <div>>>> Utente("Alessandro", "Cucci")</div>
-                <div>Utente(nome='Alessandro', cognome='Cucci', email='')</div>
+                <div>>>> Utente(nome='Tony', cognome='Stark')</div>
+                <div>Utente(nome='Tony', cognome='Stark', email='')</div>
               </div>
             ]}
             />
@@ -360,8 +360,8 @@ export default class Presentation extends React.Component {
             </Text>
             <Terminal margin="30px 0 0" title="1. alessandro@energee3: ~(zsh)" output={[
               <div>
-                <div>>>> a = Utente("Alessandro", "Cucci", "alessandro.cucci@energee3.com")</div>
-                <div>>>> a.email = "alessandro.cucci@gmail.com"</div>
+                <div>>>> a = Utente(nome='Tony', cognome='Stark')</div>
+                <div>>>> a.email = "iamironman@starkindustries.com"</div>
                 <div>Traceback (most recent call last):</div>
                 <div>  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</div>
                 <div>AttributeError: can't set attribute</div>
@@ -918,7 +918,6 @@ export default class Presentation extends React.Component {
               https://github.com/alessandrocucci/pyconx
             </Text>
           </Slide>
-
 
         </Deck>
       </Spectacle>
