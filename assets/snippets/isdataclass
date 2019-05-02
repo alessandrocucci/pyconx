@@ -1,0 +1,12 @@
+>>> from dataclasses import is_dataclass
+>>> ordine = Ordine(qta_ordinata=15)
+
+>>> is_dataclass(ordine)
+True
+
+>>> class OrdineUtente(Ordine):
+...     pass
+
+>>> ordine = OrdineUtente(qta_ordinata=15)
+>>> is_dataclass(ordine)
+True

@@ -1,0 +1,5 @@
+>>> from dataclasses import astuple
+>>> ordine = Ordine(qta_ordinata=15)
+
+>>> astuple(ordine)
+(15, 0, 15)

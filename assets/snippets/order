@@ -1,38 +1,38 @@
 def __lt__(self, other):
     if other.__class__ is self.__class__:
-        return (self.hue, self.saturation, self.lightness) < (
-            other.hue,
-            other.saturation,
-            other.lightness,
+        return (self.nome, self.cognome, self.email) < (
+            other.nome,
+            other.cognome,
+            other.email,
         )
     return NotImplemented
 
 
 def __le__(self, other):
     if other.__class__ is self.__class__:
-        return (self.hue, self.saturation, self.lightness) <= (
-            other.hue,
-            other.saturation,
-            other.lightness,
+        return (self.nome, self.cognome, self.email) <= (
+            other.nome,
+            other.cognome,
+            other.email,
         )
     return NotImplemented
 
 
 def __gt__(self, other):
     if other.__class__ is self.__class__:
-        return (self.hue, self.saturation, self.lightness) > (
-            other.hue,
-            other.saturation,
-            other.lightness,
+        return (self.nome, self.cognome, self.email) > (
+            other.nome,
+            other.cognome,
+            other.email,
         )
     return NotImplemented
 
 
 def __ge__(self, other):
     if other.__class__ is self.__class__:
-        return (self.hue, self.saturation, self.lightness) >= (
-            other.hue,
-            other.saturation,
-            other.lightness,
+        return (self.nome, self.cognome, self.email) >= (
+            other.nome,
+            other.cognome,
+            other.email,
         )
     return NotImplemented

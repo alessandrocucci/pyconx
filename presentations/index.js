@@ -57,7 +57,11 @@ const snippets = {
   order: require("raw-loader!../assets/snippets/order"),
   freeze: require("raw-loader!../assets/snippets/freeze"),
   fieldsdefault: require("raw-loader!../assets/snippets/fieldsdefault"),
-  fieldsdefaultfactory: require("raw-loader!../assets/snippets/fieldsdefaultfactory")
+  fieldsdefaultfactory: require("raw-loader!../assets/snippets/fieldsdefaultfactory"),
+  asdict: require("raw-loader!../assets/snippets/asdict"),
+  astuple: require("raw-loader!../assets/snippets/astuple"),
+  replace: require("raw-loader!../assets/snippets/replace"),
+  isdataclass: require("raw-loader!../assets/snippets/isdataclass")
 };
 
 preloader(images);
@@ -583,21 +587,6 @@ export default class Presentation extends React.Component {
                 - default_factory
               </Text>
             </Appear>
-            <Appear>
-              <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
-                - init
-              </Text>
-            </Appear>
-            <Appear>
-              <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
-                - repr
-              </Text>
-            </Appear>
-            <Appear>
-              <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
-                - compare
-              </Text>
-            </Appear>
           </Slide>
 
           <CodeSlide
@@ -750,22 +739,97 @@ export default class Presentation extends React.Component {
                 - asdict
               </Text>
             </Appear>
+          </Slide>
+
+          <CodeSlide
+            transition={["zoom"]}
+            code={snippets.asdict}
+            lang="python"
+            ranges={[
+              { loc: [0, 5] }
+            ]}
+          />
+
+          <Slide transition={["zoom"]} bgColor="primary">
+            <Text margin="10px 0 0" textColor="secondary" size={1} bold>
+              Metodi di comodo
+            </Text>
+            <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+              - asdict
+            </Text>
             <Appear>
               <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
                 - astuple
               </Text>
             </Appear>
+          </Slide>
+
+          <CodeSlide
+            transition={["zoom"]}
+            code={snippets.astuple}
+            lang="python"
+            ranges={[
+              { loc: [0, 5] }
+            ]}
+          />
+
+          <Slide transition={["zoom"]} bgColor="primary">
+            <Text margin="10px 0 0" textColor="secondary" size={1} bold>
+              Metodi di comodo
+            </Text>
+            <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+              - asdict
+            </Text>
+            <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+              - astuple
+            </Text>
             <Appear>
               <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
                 - replace
               </Text>
             </Appear>
+          </Slide>
+
+          <CodeSlide
+            transition={["zoom"]}
+            code={snippets.replace}
+            lang="python"
+            ranges={[
+              { loc: [0, 6] },
+              { loc: [7, 9] }
+            ]}
+          />
+
+          <Slide transition={["zoom"]} bgColor="primary">
+            <Text margin="10px 0 0" textColor="secondary" size={1} bold>
+              Metodi di comodo
+            </Text>
+            <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+              - asdict
+            </Text>
+            <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+              - astuple
+            </Text>
+            <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
+              - replace
+            </Text>
             <Appear>
               <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
                 - is_dataclass
               </Text>
             </Appear>
           </Slide>
+
+          <CodeSlide
+            transition={["zoom"]}
+            code={snippets.isdataclass}
+            lang="python"
+            ranges={[
+              { loc: [0, 5] },
+              { loc: [6, 8] },
+              { loc: [9, 12] }
+            ]}
+          />
 
           <Slide transition={["zoom"]} bgColor="primary">
             <Layout>

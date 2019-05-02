@@ -1,0 +1,5 @@
+>>> from dataclasses import asdict
+>>> ordine = Ordine(qta_ordinata=15)
+
+>>> asdict(ordine)
+{'qta_ordinata': 15, 'qta_annullata': 0, 'qta': 15}

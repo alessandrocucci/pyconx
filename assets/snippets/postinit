@@ -1,7 +1,7 @@
 @dataclass
 class Ordine:
     qta_ordinata: float
-    qta_annullata: float
+    qta_annullata: float = 0
 
     @property
     def qta(self):
@@ -11,7 +11,7 @@ class Ordine:
 @dataclass
 class Ordine:
     qta_ordinata: float
-    qta_annullata: float
+    qta_annullata: float = 0
     qta: float = field(init=False)
 
     def __post_init__(self):

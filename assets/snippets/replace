@@ -1,0 +1,9 @@
+>>> from dataclasses import replace
+>>> ordine = Ordine(qta_ordinata=15)
+
+>>> ordine.qta_ordinata=10
+>>> ordine
+Ordine(qta_ordinata=10, qta_annullata=0, qta=15)
+
+>>> replace(ordine, qta_ordinata=10)
+Ordine(qta_ordinata=10, qta_annullata=0, qta=10)
