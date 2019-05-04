@@ -320,6 +320,9 @@ export default class Presentation extends React.Component {
           </Slide>
 
           <Slide transition={["slide", "fade"]}>
+            <Text margin="10px 0 0" textColor="secondary" size={1} bold>
+              Defaults
+            </Text>
             <Terminal title="1. alessandro@energee3: ~(zsh)" output={[
               <div>
                 <div>>>> from collections import namedtuple</div>
@@ -386,7 +389,7 @@ export default class Presentation extends React.Component {
             ranges={[
               { loc: [0, 16] },
               { loc: [17, 23] },
-              { loc: [24, 34] }
+              { loc: [24, 34], note: "La classe è importante!" }
             ]}
           />
 
@@ -485,11 +488,6 @@ export default class Presentation extends React.Component {
             <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
               - order=False
             </Text>
-            <Appear>
-              <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
-                - unsafe_hash=False
-              </Text>
-            </Appear>
             <Appear>
               <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
                 - frozen=False
@@ -850,9 +848,6 @@ export default class Presentation extends React.Component {
                   Mutevoli
                 </Text>
                 <Text margin="10px 0 0" textColor="tertiary" size={1} bold>
-                  Non hashable
-                </Text>
-                <Text margin="10px 0 0" textColor="tertiary" size={1} bold>
                   Non iterabili
                 </Text>
               </Fill>
@@ -879,11 +874,6 @@ export default class Presentation extends React.Component {
                     <Appear>
                       <Text margin="10px 0 0" textColor="tertiary" size={1} bold>
                         Immutabili
-                      </Text>
-                    </Appear>
-                    <Appear>
-                      <Text margin="10px 0 0" textColor="tertiary" size={1} bold>
-                        Hashable
                       </Text>
                     </Appear>
                     <Appear>
