@@ -680,7 +680,7 @@ export default class Presentation extends React.Component {
 
           <Slide transition={["zoom"]} bgColor="primary">
             <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
-              il metoto __post_init__
+              il metodo __post_init__
             </Text>
           </Slide>
 
@@ -793,7 +793,7 @@ export default class Presentation extends React.Component {
             code={snippets.replace}
             lang="python"
             ranges={[
-              { loc: [0, 6] },
+              { loc: [0, 6], note: "L'__init__ viene chiamato solo una volta!" },
               { loc: [7, 9] }
             ]}
           />
