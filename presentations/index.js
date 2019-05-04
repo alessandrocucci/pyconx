@@ -907,6 +907,12 @@ export default class Presentation extends React.Component {
             <Text margin="30px 0 0" textColor="tertiary" size={1} bold>
               https://github.com/alessandrocucci/pyconx
             </Text>
+            <Text margin="50px 0 0" textColor="secondary" size={1} bold>
+             @alessandrocucci
+            </Text>
+            <Text margin="10px 0 0" textColor="secondary" size={1} bold>
+             alessandro.cucci@energee3.com
+            </Text>
           </Slide>
 
         </Deck>
